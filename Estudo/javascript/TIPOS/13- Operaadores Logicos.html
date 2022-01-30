@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //operador logico e (&&)
+        //retorna true se os dois operandos forem true
+
+        console.log(true && true);
+        console.log(false && true);
+        console.log(false && false);
+
+        console.log("---------------");
+        let maiorDeIdade = true;
+        let possuiCarteiraDeTrabalho = true;
+        let podeAplicar = maiorDeIdade && possuiCarteiraDeTrabalho;
+        console.log(podeAplicar);
+
+        //operador logico ou (||)
+       
+        let maiorDeIdade = false;
+        let possuiCarteiraDeTrabalho = true;
+        let podeAplicar = maiorDeIdade || possuiCarteiraDeTrabalho;
+        console.log("pode aplicar" ,podeAplicar);
+
+        
+        //operador logico not (!)
+   
+       let candidatoRecusado = !podeAplicar;
+       console.log("candidato recusado", candidatoRecusado);
+
+    </script>
+</body>
+</html>

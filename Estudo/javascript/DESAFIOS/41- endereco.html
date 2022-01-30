@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //objeto endereco
+        //criar um objeto endereco
+        //rua
+        //cidade
+        //cep
+      //exibirEndereco(endereco)
+      
+      let endereco = {
+          rua : 'a',
+          cidade : 'b',
+          cep : 'c'
+      }
+
+      function exibirEndereco(endereco){
+          for (let chave in endereco)
+          console.log(chave,endereco[chave]);
+      }
+      exibirEndereco(endereco);
+    </script>
+</body>
+</html>

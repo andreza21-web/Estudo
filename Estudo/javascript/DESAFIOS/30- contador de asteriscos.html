@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //criar uma funcoa que exiba a quantidade de *
+      //que aquela linha possui
+      exibirAsteriscos(10);
+
+      function exibirAsteriscos(linhas) {
+        //     let padrao = ' ';
+        //     for(let linha = 1; linha <= linhas; linha++){
+        //         padrao += '*';
+        //         console.log(padrao);
+        //     }
+
+        for (let linha = 1; linha <= linhas; linha++) {
+          let padrao = "";
+          for (let i = 0; i < linha; i++) {
+            padrao += "*";
+          }
+          console.log(padrao);
+        }
+      }
+    </script>
+  </body>
+</html>

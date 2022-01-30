@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+
+    <title>Conversor de moedas</title>
+  </head>
+  <body>
+    <div class="container">
+      <p class="text-center fs-3">CONVERSOR DE MOEDAS</p>
+      <div class="row">
+        <div class="col-3">
+          <select class="form-select" id="moedaEntrada"></select>
+          <input
+            class="form-control"
+            type="number"
+            id="moedaEntradaDados"
+            value="1"
+          />
+        </div>
+        <div class="col-1">
+          <button class="btn btn-outline-dark" id="trocarValores">⇅</button>
+        </div>
+        <div class="col-3">
+          <select class="form-select" id="moedaSaida"></select>
+          <input class="form-control" type="number" id="moedaSaidaDados" />
+        </div>
+      </div>
+      <span id="resultadoMoeda"> </span>
+    </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const label_moedaEntrada = document.getElementById("moedaEntrada");
+      const input_moedaEntradaDados =
+        document.getElementById("moedaEntradaDados");
+      const label_moedaSaida = document.getElementById("moedaSaida");
+      const input_moedaSaidaDados = document.getElementById("moedaSaidaDados");
+
+      const resultadoMoeda = document.getElementById("resultadoMoeda");
+      const trocarValores = document.getElementById("trocarValores");
+
+      label_moedaEntrada.addEventListener("change", calcularMoeda);
+      input_moedaEntradaDados.addEventListener("input", calcularMoeda);
+      label_moedaSaida.addEventListener("change", calcularMoeda);
+      input_moedaSaidaDados.addEventListener("input", calcularMoeda);
+      trocarValores.addEventListener("click", infotrocarValores);
+
+      main();
+
+      function main() {
+        0;
+        let moedas = {
+          BRL: "Real",
+          EUR: "Euro",
+          USD: "Dolar Americano",
+          AUD: "Dólar australiano",
+          CAD: "Dólar canadense",
+          CHF: "Franco suíço",
+          DKK: "Coroa dinamarquesa",
+          GBP: "Libra Esterlina",
+          JPY: "Iene",
+          NOK: "Coroa norueguesa",
+          SEK: "Coroa sueca",
+        };
+
+        let options = [];
+        for (var [key, value] of Object.entries(moedas)) {
+          options.push(`<option value='${key}'>${value}</option>`);
+        }
+
+        label_moedaEntrada.innerHTML = options.join("\n");
+        label_moedaSaida.innerHTML = options.join("\n");
+        calcularMoeda();
+      }
+
+      function infotrocarValores() {
+        let temp = label_moedaEntrada.value;
+        label_moedaEntrada.value = label_moedaSaida.value;
+        label_moedaSaida.value = temp;
+        calcularMoeda();
+      }
+
+      async function getURL(url) {
+        return (await fetch(url)).json();
+      }
+
+      function getInfoSelect(select) {
+        return select.options[select.selectedIndex].text;
+      }
+
+      async function calcularMoeda() {
+        let entrada = label_moedaEntrada.value;
+        let saida = label_moedaSaida.value;
+        let { rates } = await getURL(
+          `https://api.exchangerate-api.com/v4/latest/${entrada}`
+        );
+
+        let rate = rates[saida];
+        resultadoMoeda.innerText = `1 ${getInfoSelect(
+          label_moedaEntrada
+        )} = ${rate} ${getInfoSelect(label_moedaSaida)}`;
+        input_moedaSaidaDados.value = (
+          input_moedaEntradaDados.value * rate
+        ).toFixed(2);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //criar um metodo para ler propriedades de um objeto
+      //exibir somente as propriedades do tipo string que estao nesse objeto
+
+      const filme = {
+        titulo: "vingadores",
+        ano: 2018,
+        diretor: "robin",
+        personagem: "thor",
+      };
+
+      exibirPropriedade(filme);
+      function exibirPropriedade(obj) {
+        for (prop in obj)
+          if (typeof prop === "string") console.log(prop, obj[prop]);
+      }
+    </script>
+  </body>
+</html>

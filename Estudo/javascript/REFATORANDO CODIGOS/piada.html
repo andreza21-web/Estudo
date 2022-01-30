@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function chamarAPI(termo) {
+        const param = { headers: { Accept: "application/json" } };
+        return new Promise(function (resolve, reject) {
+          fetch(" https://icanhazdadjoke.com/search?term=" + termo, param).then(
+            function (piada) {
+              return piada.json().then(function (dado) {
+                console.log(dado.results[0].joke);
+                resolve();
+              });
+            }
+          );
+        });
+      }
+      buscarPiada();
+
+      function buscarPiada() {
+        chamarAPI("spider")
+          .then(() => chamarAPI("ghost"))
+          .then(() => chamarAPI("pizza"))
+          .then(() => chamarAPI("wolf"))
+          .then(() => chamarAPI("ant"))
+          .catch(error => console.log(error))
+      }
+    </script>
+  </body>
+</html>

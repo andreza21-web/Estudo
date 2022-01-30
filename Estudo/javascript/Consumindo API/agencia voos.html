@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+
+    <title>Compare voos baratos...</title>
+  </head>
+  <body>
+    <div class="container-md">
+      <p class="text-center fs-1">Compare Voos mais Baratos</p>
+      <p class="text-center fs-2">Nacionais</p>
+
+      <!-- inserir informações para consulta de voos -->
+      <div class="card mb-3">
+        <!-- <img src="https://cdn.pixabay.com/photo/2016/07/05/18/35/aircraft-1499171__340.jpg" class="img-fluid" alt="avião" /> -->
+        <div class="card-body">
+          <h5 class="card-title">Comece sua jornada</h5>
+          <div class="input-group mb-3">
+            <select class="form-select" name="idLocalIda" id="idLocalIda">
+               <option value="BSB-sky">Brasilia</option>
+              <option value="SAOA-sky">São Paulo</option>
+              <option value="GRU-sky">Guarulhos Cumbia SP</option>
+              <option value="CGH-sky">São Paulo Conganhas</option>
+              <option value="VCP-sky">São Paulo Viracopos</option>
+              <option value="REC-sky">Recife</option>
+              <option value="POA-sky">Porto Alegre</option>
+              <option value="FOR-sky">Fortaleza</option>
+              <option value="SSA-sky">Salvador</option>
+              <option value="GIG-sky">Rio de Janeiro</option>
+              <option value="VIX-sky">Vitoria</option>
+              <option value="FLN-sky">Florianopolis</option>
+              <option value="GYN-sky">Goiana</option>
+              <option value="BEL-sky">Belem</option>
+            </select>
+
+            <select
+              class="form-select"
+              name="idLocalDestino"
+              id="idLocalDestino"
+            >
+              <option value="BSB-sky">Brasilia</option>
+              <option value="SAOA-sky">São Paulo</option>
+              <option value="GRU-sky">Guarulhos Cumbia SP</option>
+              <option value="CGH-sky">São Paulo Conganhas</option>
+              <option value="VCP-sky">São Paulo Viracopos</option>
+              <option value="REC-sky">Recife</option>
+              <option value="POA-sky">Porto Alegre</option>
+              <option value="FOR-sky">Fortaleza</option>
+              <option value="SSA-sky">Salvador</option>
+              <option value="GIG-sky">Rio de Janeiro</option>
+              <option value="VIX-sky">Vitoria</option>
+              <option value="FLN-sky">Florianopolis</option>
+              <option value="GYN-sky">Goiana</option>
+              <option value="BEL-sky">Belem</option>
+            </select>
+            <input type="date" class="form-control" name="nmIda" id="idIda" />
+
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              id="btnBuscar"
+            >
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- mostrar na tela resultados da consulta -->
+      <p><output id="aviao"> </output></p>
+      <p><output id="dataIda"> </output></p>
+
+      <p><output id="nomeIda"> </output></p>
+
+      <p><output id="nomeVolta"> </output></p>
+      <p><output id="valor"> </output></p>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+
+    <script>
+      // CRIAR UM  BUTTON
+
+      var btnBuscar = document.getElementById("btnBuscar");
+      btnBuscar.onclick = function () {
+        buscarApi();
+      };
+      // PEGAR INFORMAÇÕES DOS INPUTS
+
+      //  extrair informações da API
+
+      function buscarApi() {
+        const diaIda = document.getElementById("idIda").value;
+        var select = document.getElementById("idLocalIda");
+        var ida = select.options[select.selectedIndex].value;
+        var select2 = document.getElementById("idLocalDestino");
+        var volta = select2.options[select2.selectedIndex].value;
+
+        fetch(
+          "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/BR/BRL/pt-BR/" +
+            ida +
+            "/" +
+            volta +
+            "/" +
+            diaIda,
+          {
+            method: "GET",
+            headers: {
+              "x-rapidapi-host":
+                "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+              "x-rapidapi-key":
+                "69b9b48ca9mshe5277bcadcdea89p17034djsnfea8c61f9eff",
+            },
+          }
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then(function (dado) {
+            console.log(dado);
+            document.getElementById("aviao").value =
+              "Linha aerea: " + dado.Carriers[0].Name;
+
+            document.getElementById("dataIda").value =
+              "Data de Partida: " + dado.Quotes[0].OutboundLeg.DepartureDate;
+
+            document.getElementById("nomeIda").value =
+              "Local de origem: " + dado.Places[0].Name;
+
+            document.getElementById("nomeVolta").value =
+              "Local de destino: " + dado.Places[1].Name;
+
+            document.getElementById("valor").value =
+              "Valor: " + dado.Currencies[0].Symbol + dado.Quotes[0].MinPrice;
+
+            console.log(dado);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    </script>
+  </body>
+</html>

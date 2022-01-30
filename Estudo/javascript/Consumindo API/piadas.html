@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // busca das 5 piadas
+
+      buscarPiada("spider", callback);
+      buscarPiada("ghost", callback);
+      buscarPiada("pizza", callback);
+      buscarPiada("wolf", callback);
+      buscarPiada("ant", callback);
+
+      //buscar a resposta da piada
+      function callback(resposta) {
+        // console.log(resposta);
+        //receber indice de cada array
+      }
+
+      //endereco da API
+      function buscarPiada(resposta) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://icanhazdadjoke.com/search?term=" + resposta);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.addEventListener("load", function () {
+          var resposta = JSON.parse(xhr.responseText);
+          var piada = resposta.results[0].joke;
+          callback(resposta, piada);
+          // console.log(callback);
+          console.log("resposta -> " + resposta.results[0].joke);
+        });
+
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>

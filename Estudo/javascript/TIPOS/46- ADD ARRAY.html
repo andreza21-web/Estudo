@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <script>
+            //adicionando elemento em um array
+
+            const numeros = [1,2,3];
+            
+            //inserir no inicio
+            numeros.unshift(0);
+            console.log(numeros);
+
+            //inserir no meio
+            numeros.splice(1, 0, 'a')
+            console.log(numeros);
+
+            //inserir no final 
+            numeros.push(5);
+            console.log(numeros);
+        </script>
+</body>
+</html>

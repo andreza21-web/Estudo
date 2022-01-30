@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" name="nmNumro" id="idNumero" >
+    <button type="button" id="btnEnviar" onclick="enviar()">Enviar</button>
+    <output id="idResultado"></output>
+    <script>
+      //   var btnEnviar = document.getElementById("btnEnviar");
+
+      //   btnEnviar.addEventListener("click", function () {
+
+          var senhaValida = Math.floor(Math.random() * (11 - 1) + 1);
+          var msn;
+          var tentativa = 1
+
+      function enviar() {
+        let senha = document.getElementById("idNumero").value;
+
+
+        if (tentativa == 3 && senha != senhaValida) {
+            msn ="usuario Bloquedo"
+            btnEnviar.disabled = true
+        } else {
+            
+            if (senha == senhaValida) {
+              msn= "acesso Permitido";
+              btnEnviar.disabled = true
+            } else {
+                tentativa++
+              msn= "Você não tem Acesso ao sistema";
+            }
+        }
+        document.getElementById("idResultado").innerHTML = msn;
+        console.log(msn);
+      }
+
+   // console.log(Math.floor(Math.random() * (11 - 1) + 1));
+        console.log( "numero " + senhaValida);
+    </script>
+  </body>
+</html>

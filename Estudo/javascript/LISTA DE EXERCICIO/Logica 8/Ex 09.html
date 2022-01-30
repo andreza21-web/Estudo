@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <hr>
+    <label for="idSenha">Senha</label>
+    <input type="password" name="nmSenha" id="idSenha">
+    <br><br>
+    <button type="button" id="idBtn" >Login</button>
+
+    <output id="idOut"></output>
+    <script>
+
+        var contraSenha = "12345"
+        var countTentativa = 1
+
+        var btnLogin = document.getElementById("idBtn")
+
+            btnLogin.onclick = function(){
+                let senha = document.getElementById("idSenha").value
+                let msn
+
+                if(countTentativa == 3 && senha != contraSenha){
+                    msn = "usuario bloqueado por varias tentaivas"
+                    btnLogin.disabled = true
+                }else{
+                    if(senha == contraSenha){
+                     msn = "usuario logado"
+                      btnLogin.disabled = true
+                    }else{
+                          countTentativa++
+                        msn = "senha invalida"
+                    }
+                }
+
+                   document.getElementById("idOut").value = msn
+            }
+    </script>
+</body>
+</html>

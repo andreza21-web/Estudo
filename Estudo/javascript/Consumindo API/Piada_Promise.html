@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIADA PROMISE</title>
+</head>
+
+<body>
+
+    <script>
+        buscarPiada()
+
+
+        function buscarPiada() {
+
+            const param = { headers: { Accept: 'application/json' } }
+            fetch(' https://icanhazdadjoke.com/search?term=spider', param)
+                .then(function (piada) {
+                    return piada.json()
+                        .then(function (dado) {
+                            console.log(dado.results[0].joke);
+                            fetch(' https://icanhazdadjoke.com/search?term=ghost', param)
+                                .then(function (piada) {
+                                    return piada.json()
+                                        .then(function (dado) {
+                                            console.log(dado.results[0].joke);
+                                            fetch(' https://icanhazdadjoke.com/search?term=pizza', param)
+                                                .then(function (piada) {
+                                                    return piada.json()
+                                                        .then(function (dado) {
+                                                            console.log(dado.results[0].joke);
+                                                            fetch(' https://icanhazdadjoke.com/search?term=wolf', param)
+                                                                .then(function (piada) {
+                                                                    return piada.json()
+                                                                        .then(function (dado) {
+                                                                            console.log(dado.results[0].joke);
+                                                                            fetch(' https://icanhazdadjoke.com/search?term=ant', param)
+                                                                                .then(function (piada) {
+                                                                                    return piada.json()
+                                                                                        .then(function (dado) {
+                                                                                            console.log(dado.results[0].joke);
+
+                                                                                        })
+
+                                                                                })
+
+                                                                        })
+
+                                                                })
+
+                                                        })
+
+                                                })
+
+                                        })
+
+                                })
+
+                        })
+
+                })
+
+        }
+
+
+        ///passo 2 refatorando codigo
+
+        buscarPiada2()
+
+        function chamarFeach(termo) {
+            const param = { headers: { Accept: 'application/json' } }
+            return (
+                fetch(' https://icanhazdadjoke.com/search?term=' + termo, param)
+                    .then(function (piada) {
+                        return piada.json()
+                    })
+            )
+        }
+
+
+        function buscarPiada2() {
+
+            chamarFeach2("spider ").then(function (dado) {
+                console.log(dado.results[0].joke);
+                chamarFeach2("ghost ").then(function (dado) {
+                    console.log(dado.results[0].joke);
+                    chamarFeach2("pizza ").then(function (dado) {
+                        console.log(dado.results[0].joke);
+                        chamarFeach2("wolf ").then(function (dado) {
+                            console.log(dado.results[0].joke);
+                            chamarFeach2("ant ").then(function (dado) {
+                                console.log(dado.results[0].joke);
+
+                            })
+
+                        })
+
+                    })
+
+                })
+
+            })
+
+        }
+
+        //refatoracao 3
+        buscarPiada3()
+
+        function chamarFeach3(termo) {
+            const param = { headers: { Accept: 'application/json' } }
+            return new Promise(function (resolve, reject) {
+                fetch(' https://icanhazdadjoke.com/search?term=' + termo, param)
+                    .then(function (piada) {
+                        return piada.json().then(function (dado) {
+                            console.log(dado.results[0].joke);
+                            resolve()
+                        })
+                    })
+            })
+        }
+
+        function buscarPiada3() {
+            chamarFeach3("spider").then(function () {
+                chamarFeach3("ghost").then(function () {
+                    chamarFeach3("pizza").then(function () {
+                        chamarFeach3("wolf").then(function () {
+                            chamarFeach3("ant")
+                        })
+                    })
+                })
+            })
+        }
+
+        //refatorando 4
+
+        buscarPiada4()
+        //buscar pelo endereco da API piadas
+        function chamarFeach4(termo) {
+            const param = { headers: { Accept: 'application/json' } }
+            return new Promise(function (resolve, reject) {
+                fetch(' https://icanhazdadjoke.com/search?term=' + termo, param)
+                    .then(function (piada) {
+                        return piada.json().then(function (dado) {
+                            console.log(dado.results[0].joke);
+                            resolve()
+                        })
+                    })
+            })
+        }
+
+        //usando arrow function
+        function buscarPiada4() {
+            chamarFeach("spider")
+                .then(() => chamarFeach4("ghost"))
+                .then(() => chamarFeach4("pizza"))
+                .then(() => chamarFeach4("wolf"))
+                .then(() => chamarFeach4("ant"))
+                .catch(error => console.log(error))
+        }
+
+    </script>
+</body>
+
+</html>

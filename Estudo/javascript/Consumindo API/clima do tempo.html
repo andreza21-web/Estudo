@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    
+
+
+
+
+
+    <script>
+      fetch("https://weatherapi-com.p.rapidapi.com/timezone.json?q=sao paulo", {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
+          "x-rapidapi-key":
+            "69b9b48ca9mshe5277bcadcdea89p17034djsnfea8c61f9eff",
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then(function (dado) {
+          console.log(dado);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      ////////////////////////com dias////////////
+
+      fetch(
+        "https://weatherapi-com.p.rapidapi.com/forecast.json?q=sao%20paulo&days=3",
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
+            "x-rapidapi-key":
+              "69b9b48ca9mshe5277bcadcdea89p17034djsnfea8c61f9eff",
+          },
+        }
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then(function (dado) {
+          console.log(dado);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    </script>
+  </body>
+</html>

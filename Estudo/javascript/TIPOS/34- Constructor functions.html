@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    function criarCelular(marcaCelular, tamanhoTela, capacidadeBateria){
+
+       return {
+            marcaCelular,
+            tamanhoTela,
+            capacidadeBateria,
+            ligar(){
+                console.log("fazendo uma ligação...");
+            }
+        }
+        }
+        //Pascal Case = UmDoisTresQuatro
+        function Celular(marcaCelular, tamanhoTela, capacidadeBateria){
+            this.marcaCelular = marcaCelular,
+            this.tamanhoTela = tamanhoTela,
+            this.capacidadeBateria = capacidadeBateria,
+            this.ligar = function(){
+                console.log("fazendo ligacao....");
+            }
+        }
+
+        const celular = new Celular("asus", 5.5,5000);
+        console.log(celular);
+    </script>
+</body>
+</html>

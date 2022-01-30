@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //esvaziando um array
+        const numeros = [ 1,2,3,4,5,6]
+        let outros = numeros
+        //solucao 1 apaga informacoes iniciais do array
+        // numeros = [];
+        // console.log(outros);
+
+        //solucao 2 apaga tudo dos array
+        //metodo clear code
+        numeros.length = 0;
+        console.log(numeros);
+        console.log(outros);
+
+        //solucao 3 apaga informacoes com length
+        // numeros.splice(0, numeros.length);
+        // console.log(numeros);
+        // console.log(outros);
+
+        //solucao 4 com um loop
+        //usa muitp processamento
+        // while (numeros.length > 0)
+        // numeros.pop()
+    </script>
+</body>
+</html>

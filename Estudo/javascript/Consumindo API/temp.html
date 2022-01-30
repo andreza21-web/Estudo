@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather | By Si</title>
+    <link rel="shortcut icon" href="img/weather.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="mb-3 col-4">
+            <input type="text" class="form-control" name="place" id="place" autofocus>
+            <div id="emailHelp" class="form-text">Informe o nome da Cidade.</div>
+        </div>
+        <div class="row mt-4 text-center align-items-center">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col">
+                        <img src="" id="img" alt="">
+                        <span class="font-weight-bolder fs-3" id="temp"></span>
+                    </div>
+                    <div class="col">
+                        <span class="row fs-6 fw-light" id="pressure"></span>
+                        <span class="row fs-6 fw-light" id="humidity"></span>
+                        <span class="row fs-6 fw-light" id="wind"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <span class="row fs-1" id="city"></span>
+                <span class="row fs-6 fw-light text-capitalize" id="description"></span>
+                <span class="row fs-6 fw-light" id="date"></span>
+            </div>
+        </div>
+        <div class="row" id="forecast"></div>
+    </div>
+
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+        <script>
+            document.querySelector('#place').addEventListener('input', () => {
+    var place = document.querySelector('#place').value;
+    if (place != "") {
+        fetch("https://weatherapi-com.p.rapidapi.com/forecast.json?q=" + place + "&days=3&lang=pt", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
+                "x-rapidapi-key": "182376fa68msh3dada38fcca660ap1744c2jsne60c8b6bdd78"
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                document.querySelector('#img').src = data.current.condition.icon;
+                document.querySelector('#temp').innerHTML = data.current.temp_c + "ºC | ºF"
+                document.querySelector('#pressure').innerHTML = "Precipitação: " + data.current.precip_mm + "mm"
+                document.querySelector('#humidity').innerHTML = "Humidade: " + data.current.humidity + "%"
+                document.querySelector('#wind').innerHTML = "Vento: " + data.current.wind_kph + "km/h"
+                document.querySelector('#date').innerHTML = formatDate(data.forecast.forecastday[0].date)
+                document.querySelector('#city').innerHTML = data.location.name + ", " + data.location.region
+                document.querySelector('#description').innerHTML = "Neste momento: " + data.current.condition.text
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
+})
+
+function formatDate(date) {
+    return String(date).split('-').reverse().join('-');
+}
+
+function convert(temp, tipo) {
+    switch (tipo) {
+        case 'fahrenheint':
+            return (temp * 9 / 5) + 32;
+            break;
+        case 'celsius':
+            return (temp - 32) * 5 / 9;
+            break;
+        default:
+            return 0;
+    }
+}
+        </script>
+</body>
+
+</html>

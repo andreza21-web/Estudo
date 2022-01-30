@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //igualdade de objetos
+
+      function Endereco(rua, cidade, cep) {
+        (this.rua = rua), (this.cidade = cidade), (this.cep = cep);
+      }
+
+      const endereco1 = new Endereco("a", "b", "c");
+      const endereco2 = new Endereco("a", "b", "c");
+      const endereco3 = endereco1;
+
+      function saoIguais(endereco1, endereco2) {
+        //comparar se as propriedades sao iguais
+        return (
+          endereco1.rua === endereco2.rua &&
+          endereco1.cidade === endereco2.cidade &&
+          endereco1.cep === endereco2.cep
+        );
+      }
+
+      function temEnderecoMemoriaIguais(endereco1, endereco2) {
+        //comparar se aponta para o mesmo local da memoria
+        return endereco1 === endereco3;
+      }
+      console.log(temEnderecoMemoriaIguais(endereco1, endereco2));
+    </script>
+  </body>
+</html>

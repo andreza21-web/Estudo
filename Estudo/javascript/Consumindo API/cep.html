@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscar endereco pelo Cep</title>
+  </head>
+  <body>
+    <div>
+      <label for="idCep">CEP</label><br />
+      <input type="text" id="idCep" />
+      <br />
+      <br />
+      <label for="idRua">Rua</label><br />
+      <input type="text" id="idRua" />
+      <br />
+      <br />
+      <label for="idBairro">Bairro</label><br />
+      <input type="text" id="idBairro" />
+      <br />
+      <br />
+      <label for="idCidade">Cidade</label><br />
+      <input type="text" id="idCidade" />
+
+      <button type="button" id="idBuscarCeo">Buscar</button>
+    </div>
+
+    <script>
+      var endereco = document.getElementById("idBuscarCeo");
+      endereco.onclick = function () {
+        buscarEndereco();
+      };
+
+      // buscando endereco pelo cep
+      function buscarEndereco() {
+        let cep = document.getElementById("idCep").value;
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "https://viacep.com.br/ws/" + cep + "/json/");
+
+        xhr.addEventListener("load", function () {
+          var resposta = xhr.responseText;
+          var respostaOBJ = JSON.parse(resposta);
+
+          document.getElementById("idRua").value = respostaOBJ.logradouro;
+          document.getElementById("idBairro").value = respostaOBJ.bairro;
+          document.getElementById("idCidade").value = respostaOBJ.localidade;
+
+          console.log(respostaOBJ);
+          console.log(Number(respostaOBJ.ddd));
+        });
+
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>

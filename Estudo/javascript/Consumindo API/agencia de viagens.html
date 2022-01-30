@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/BR/BRL/pt-BR/?query=brasil", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+		"x-rapidapi-key": "69b9b48ca9mshe5277bcadcdea89p17034djsnfea8c61f9eff"
+	}
+})
+        .then((response) => {
+          return response.json();
+        })
+        .then(function (dado) {
+          console.log(dado);
+        })
+        .catch((err) => {
+          console.error(err);
+       });
+
+      fetch(
+        "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/currencies ",
+        {
+          method: "GET",
+          headers: {
+            "x-rapidapi-host":
+              "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+            "x-rapidapi-key":
+              "69b9b48ca9mshe5277bcadcdea89p17034djsnfea8c61f9eff",
+          },
+        }
+      )
+          .then((response) => {
+          return response.json();
+        })
+        .then(function (dado) {
+          console.log(dado);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+
+        
+        
+               fetch(
+            "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/BR/BRL/pt-BR/SSA-sky/BSB-sky/BR-sky/2021-09-21",
+            {
+              method: "GET",
+              headers: {
+                "x-rapidapi-host":
+                  "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+                "x-rapidapi-key":
+                  "69b9b48ca9mshe5277bcadcdea89p17034djsnfea8c61f9eff",
+              },
+            }
+          )
+
+           .then((response) => {
+          return response.json();
+        })
+        .then(function (dado) {
+          console.log(dado);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+    </script>
+  </body>
+</html>

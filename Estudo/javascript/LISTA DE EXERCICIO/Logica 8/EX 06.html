@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="idNome">Nome</label>
+    <input type="text" name="nmNome" id="idNome" />
+    <br /><br />
+    <label for="idFem">Feminino</label>
+    <input type="radio" name="nmSexo" id="idFem" />
+    <br /><br />
+    <label for="idMasc">Masculino</label>
+    <input type="radio" name="nmSexo" id="idMasc" />
+    <br /><br />
+    <label for="idIdade">Idade</label>
+    <input type="number" name="nmIdade" id="idIdade" />
+    <br /><br />
+    <label for="idSaude">Saude</label>
+    <input type="text" name="nmSaude" id="idSaude" />
+    <br /><br />
+
+    <output id="idResultado"></output>
+
+    <button id="btnEnviar" onclick="enviar()">Enviar</button>
+
+    <script>
+      function enviar() {
+        let nome = document.getElementById("idNome").value;
+        let fem = document.getElementById("idFem").checked;
+        let masc = document.getElementById("idMasc").checked;
+        let idade = document.getElementById("idIdade").value;
+        let saude = document.getElementById("idSaude").value;
+
+        var condicaoSaude = "Saudavel";
+
+        var msn;
+
+        if (idade >= 18 && saude == condicaoSaude && masc) {
+          msn = nome + " serviço militar obrigatorio";
+        } else if (idade >= 18 && saude == condicaoSaude && fem) {
+          msn = nome + " Servico militar não obrigatorio mas  apta";
+        } else {
+          msn = nome + " não apto/apta";
+        }
+        // console.log(masc);
+        document.getElementById("idResultado").value = msn;
+      }
+
+  
+      console.log(Math.floor(Math.random() * (11 - 1) + 1));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="idIdade">Idade</label>
+    <input type="number" id="idIdade" />
+    <br />
+    <br />
+    <input type="radio" id="idFeminino" name="nmSexo" />
+    <label for="idFeminino">Feminino</label>
+    <br />
+    <input type="radio" id="idMasculino" name="nmSexo"  />
+    <label for="idMasculino">Masculino</label>
+    <br /><br />
+    <button type="button" id="idBtn">Checar</button>
+
+    <br /><br />
+    <output id="idOut"></output>
+    <script>
+      var btnChecar = document.getElementById("idBtn");
+      btnChecar.addEventListener("click", function () {
+          var idade = Number(document.getElementById("idIdade").value)
+          var isFem = document.getElementById("idFeminino").checked
+          var isMasc = document.getElementById("idMasculino").checked
+        var msn
+        //feminino
+          if(isFem){
+              if(idade >= 55){
+                  msn  = " (Feminino): Pode aposentar"
+              }else{
+                  msn = " (Feminino):nao pode aposentar"
+              }
+          }
+          //////masculino
+          else{
+              if(idade >=65){
+                  msn = " (Masculino): Pode aposentar"
+              }else{
+                  masn = " (Masculino):nao pode aposentar"
+              }
+          }
+
+          document.getElementById("idOut").value = msn
+      });
+    </script>
+  </body>
+</html>

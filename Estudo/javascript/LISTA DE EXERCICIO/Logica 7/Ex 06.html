@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var array = [3, 2, 8, 9, 10, 1, 5, 33];
+      var trocou = false;
+
+    var arrayOrdenado =  ordenar(array, "crescente")
+    console.log(arrayOrdenado);
+
+    function ordenar(array, ordem){
+        if(ordem == "crescente"){
+        return   ordenarCrescente(array)
+        }else if (ordem == "descrescente"){
+            return ordenarDescrescente(array)
+        }
+    }
+
+      function ordenarCrescente(array) {
+        while (trocou) {
+          for (let i = 0; i < array.length - 1; i++) {
+            if (array[1] > array[i + 1]) {
+              let aux = array[i];
+              array[i] = array[i + 1];
+              array[i + 1] = aux;
+              trocou = true;
+            }
+          }
+        }
+        return array
+      }
+    </script>
+  </body>
+</html>

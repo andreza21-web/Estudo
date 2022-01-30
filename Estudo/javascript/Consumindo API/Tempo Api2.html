@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+
+    <title>Previsao do tempo</title>
+  </head>
+  <body class="text-dark bg-light">
+    <div class="container">
+      <div class="main">
+        <p class="text-center fs-2">
+          Consulte a previsão do tempo em uma localidade
+        </p>
+        <!-- tela de inserir dados pa consultar-->
+        <div class="TelaInfo">
+          <div class="row">
+            <div class="col-6">
+              <p class="fs-1"><output id="idHora"></output></p>
+              <p class="fs-2"><output id="idEstado"></output></p>
+              <p class="fs-3"><output id="idPais"></output></p>
+            </div>
+            <div class="col-6">
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Sao Paulo"
+                  id="idLocal"
+                />
+                 <input type="number" name="nmNumber" id="idNumber" placeholder="quantidade de dias"  class="form-control" max="3" />
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary bg-white text-dark"
+                  id="idbtnBuscar"
+                >
+                  Buscar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ------------------------------ informações do tempo ------------------------------------------ -->
+
+      <div class="main">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="card text-dark bg-light">
+              <div class="card-body">
+                <img
+                  src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"
+                  alt="tempo sol"
+                />
+                <h5 class="card-title text-end">
+                  <output id="idData1"></output>
+                </h5>
+                <p class="card-text text-end">
+                  <output id="idTempMax"></output>
+                </p>
+                <p class="card-text text-end">
+                  <output id="idTempMin"></output>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="card text-dark bg-light">
+              <div class="card-body">
+                 <img src="" id="img" alt="">
+                <h5 class="card-title text-end">
+                  <output id="idData2"></output>
+                </h5>
+                <p class="card-text text-end">
+                  <output id="idTempMax2"></output>
+                </p>
+                <p class="card-text text-end">
+                  <output id="idTempMin2"></output>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="card text-dark bg-light">
+              <div class="card-body">
+                <img
+                  src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"
+                  alt="tempo sol"
+                />
+                 <h5 class="card-title text-end">
+                  <output id="idData3"></output>
+                </h5>
+                <p class="card-text text-end">
+                  <output id="idTempMax3"></output>
+                </p>
+                <p class="card-text text-end">
+                  <output id="idTempMin3"></output>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- ------------------------------------------------------------------------- -->
+
+    <script>
+      //guadar dia e hora
+      const data = new Date();
+      var hora = data.getHours();
+      var min = data.getMinutes();
+      var seg = data.getSeconds();
+      var str_hora = hora + ":" + min + ":" + seg;
+      //capturar botao e elemento
+
+      var btnBuscar = document.getElementById("idbtnBuscar");
+      btnBuscar.onclick = function () {
+        buscarClima();
+      };
+
+      //captaurar informações da API
+      function buscarClima() {
+        let local = document.getElementById("idLocal").value;
+         let numero = document.getElementById("idNumber").value;
+        fetch(
+          "https://weatherapi-com.p.rapidapi.com/forecast.json?q=" +
+            local +
+            "&days=" + numero,
+          {
+            method: "GET",
+            headers: {
+              "x-rapidapi-host": "weatherapi-com.p.rapidapi.com",
+              "x-rapidapi-key":
+                "69b9b48ca9mshe5277bcadcdea89p17034djsnfea8c61f9eff",
+            },
+          }
+        )
+          .then((response) => {
+            return response.json();
+          })
+          .then(function (dado) {
+             
+            document.getElementById("idPais").value = dado.location.country;
+            document.getElementById("idEstado").value = dado.location.name;
+            //organizaando dados do clima do dia
+             document.getElementById("idData1").value = dado.forecast.forecastday[0].date;
+             document.getElementById("idTempMax").value = "Max: " + dado.forecast.forecastday[0].day.maxtemp_c + "°C"
+            document.getElementById("idTempMin").value = "Min: " + dado.forecast.forecastday[0].day.mintemp_c + '°C'
+            // dados do dia + 1
+             document.getElementById("idData2").value = dado.forecast.forecastday[1].date;
+             document.getElementById("idTempMax2").value = "Max: " + dado.forecast.forecastday[1].day.maxtemp_c + "°C"
+            document.getElementById("idTempMin2").value = "Min: " + dado.forecast.forecastday[1].day.mintemp_c + '°C'
+            //dados do dia + 2
+             document.getElementById("idData3").value = dado.forecast.forecastday[2].date;
+             document.getElementById("idTempMax3").value = "Max: " + dado.forecast.forecastday[2].day.maxtemp_c + "°C"
+            document.getElementById("idTempMin3").value = "Min: " + dado.forecast.forecastday[2].day.mintemp_c + '°C'
+            console.log(dado);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+
+     // document.getElementById("idHora").value = str_hora;
+    </script>
+  </body>
+</html>

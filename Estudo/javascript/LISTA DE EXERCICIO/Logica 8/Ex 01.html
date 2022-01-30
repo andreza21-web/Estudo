@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <hr>
+    <input type="number" step="0.01" placeholder="consumo litro de combustivel" id="idConsumo">
+    <br><br>
+      <input type="number" step="0.01" placeholder="distancia percorrida" id="idDistancia">
+      <br><br>
+      <output id="idOut" ></output>
+    <br><br>
+    <button type="button"  id="idBtn"> Calcular</button>
+    <script>
+
+        var btnCalcular = document.getElementById("idBtn")
+
+        btnCalcular.addEventListener("click", function(){
+            let consumo = Number(document.getElementById("idConsumo").value)
+            let distancia = Number(document.getElementById("idDistancia").value)
+
+
+            let kml = (distancia/consumo).toFixed(2)
+
+            document.getElementById("idOut").innerHTML = "kml/2: " + kml
+        })
+
+    </script>
+</body>
+</html>
